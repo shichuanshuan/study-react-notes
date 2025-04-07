@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello react</title>
+    <style>
+        .title {
+            background-color: orange;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1. 准备好一个"容器" -->
+    <div id="test"></div>
+
+    <!-- 2. 引入react 核心库 -->
+    <script type="text/javascript" src="../React-js/react.development.js"></script>
+    <script type="text/javascript" src="../React-js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../React-js/babel.min.js"></script>
+
+    <script type="text/babel">
+        const myId = "aTgUiGu"
+        const myData = "hello rEaCt"
+
+        // 1. 创建虚拟 DOM.
+        /**
+         * jsx 语法规则
+         * 1. 定义虚拟 DOM 时，不要写引号
+         * 2. 标签中混入 JS 表达式时要用{}
+         * 3. 样式的类名指定不要用 class，要用 className
+         * 4. 内联样式，要用 style={{key: value}} 的形式
+         * 5. 必须只有一个根标签。div 标签下面有 h2, input 标签
+         * 6. 标签必须有结束标签, <input type="text" />
+         * 7. 标签首字母 Good
+         *      1. 若首字母小写，则将该标签转为 html 中同名元素，若 html 中无该对应的同名元素，则报错
+         *      2. 若首字母大写，react就去渲染对应的组件，若组件没有定义，则报错
+         * 
+         * 
+        */
+        const VDOM = (
+            <div>
+                <h2 className="title" id={myId.toLowerCase()}>
+                    <span style={{ color: 'white', fontSize: '29px' }}>{myData.toLowerCase()}</span>
+                </h2>
+                <h2 className="title" id={myId.toLowerCase()}>
+                    <span style={{ color: 'white' }}>{myData.toLowerCase()}</span>
+                </h2>
+                <input type="text" />
+                <Good>123</Good>
+            </div>
+        )
+
+        // 2. 渲染虚拟DOM到页面
+        ReactDOM.render(VDOM, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
