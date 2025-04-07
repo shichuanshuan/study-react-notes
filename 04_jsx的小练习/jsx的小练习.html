@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello react</title>
+    <style>
+        .title {
+            background-color: orange;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1. 准备好一个"容器" -->
+    <div id="test"></div>
+
+    <!-- 2. 引入react 核心库 -->
+    <script type="text/javascript" src="../React-js/react.development.js"></script>
+    <script type="text/javascript" src="../React-js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../React-js/babel.min.js"></script>
+
+    <script type="text/babel">
+        /**
+         * 一定要注意区分：js语句（代码） 与 js表达式
+         * 1. 表达式：一个表达式会产生一个值，可以放在任何一个需要值得地方
+         *    下面这些都是表达式
+         *      (1). a
+         *      (2). a + b
+         *      (3). demo(1)
+         *      (4). arr.map()
+         *      (5). function demo() {}
+         * 
+         * 2. 语句：不会返回值，只能放在一些特定的地方
+         *    下面这些都是语句
+         *      (1). if() {}
+         *      (2). for() {}
+         *      (3). while() {}
+         *      (4). switch() {}
+        */
+
+        // 模拟一些数据
+        const data = ["Angular", "Vue", "React", "Jquery"]
+
+        const VDOM = (
+            <div>
+                <h1>前端JS框架列表</h1>
+                <ul>
+                    {
+                        // 只能填写表达式，不能填写语句。每个li需要 key 来区分，这里先简单处理
+                        data.map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })
+                    }
+                </ul>
+            </div>
+        )
+
+        // 2. 渲染虚拟 DOM 到 页面上
+        ReactDOM.render(VDOM, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
