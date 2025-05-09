@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <!-- 类的继承 -->
     <script>
         // 创建一个 Person 类
         class Person {
@@ -59,10 +60,10 @@
 
         // 2. 创建一个 Student 的实例对象
         const s1 = new Student('tom', 18, "高一")
-        console.log(s1);
+        // console.log(s1);
 
-        s1.speak()
-        s1.study()
+        // s1.speak()
+        // s1.study()
 
         /**
          * 总结：
@@ -71,6 +72,25 @@
          * 3. 类中所定义的方法，都是放在了类的原型对象上，供实例使用
         */
 
+    </script>
+
+    <!-- 类中变量直接赋值 -->
+    <script>
+        class Car {
+            constructor(name, price) {
+                this.name = name;
+                this.price = price;
+                this.wheel = 4;
+            }
+
+            // 类中可以直接写赋值语句，如下代码的含义是：给 Car 的实例对象添加一个属性，名为 a，值为1
+            a = 1
+        }
+
+        const c1 = new Car("奔驰c63", 199)
+        const c2 = new Car("宝马", 299)
+        console.log(c1)
+        console.log(c2)
     </script>
 
 </body>
