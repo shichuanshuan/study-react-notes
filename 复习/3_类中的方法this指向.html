@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+
+            study() {
+                console.log(this);
+            }
+        }
+
+        const p1 = new Person("tom", 18)
+        p1.study();
+
+        // 把 p1.study 赋值给 x 时，x 只是一个普通的函数，它不再与 p1 绑定。
+        const x = p1.study;
+        x()
+    </script>
+
+</body>
+
+</html>

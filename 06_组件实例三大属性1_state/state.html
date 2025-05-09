@@ -19,25 +19,39 @@
     <!-- 实例的属性，说明值针对类，函数没有实例 -->
     <script type="text/babel">
         // 1. 创建组件
+        // 构造器调用几次？ -- 1次
+        console.log('constructor ...')
         class Weather extends React.Component {
             constructor(props) {
                 super(props)
-                this.state = { isHot: false }
+                this.state = { isHot: false, wind: '微风' }
+                this.demo = this.changeWeather.bind(this)
             }
 
+            // render 调用几次？ -- 1+n 次，1是初始化的那次， n 是状态更新的次数
             render() {
-                console.log(this);
-                const { isHot } = this.state
-                return <h1 onClick={demo}>今天天气很{isHot ? "炎热" : "凉爽"}</h1>
+                // 读取状态
+                const { isHot, wind } = this.state
+                return <h1 onClick={this.demo}>今天天气很{isHot ? "炎热" : "凉爽"},{wind}</h1>
+            }
+
+            // changeWeather 调用几次？ -- 点几次调用几次
+            changeWeather() {
+                // 通过 Wether 实例调用 changeWeather 时，changeWeather 中的 this 就是 Weather 实例
+                // 类中的方法默认开启了局部的严格模式，所以 changeWeather 中的 this 为 undefined
+
+                // 获取原来的 isHot 值
+                const isHot = this.state.isHot
+                // 严重注意：状态必须通过 setState 进行更新，且更新是一种合作，不是替换。
+                this.setState({ isHot: !isHot })
+
+                // 严重注意：状态(state) 不可直接更改，下面这行就是直接更改！！！
+                // this.state.isHot = !isHot // 这是错误的写法
             }
         }
 
         // 2. 渲染组件到页面
         ReactDOM.render(<Weather />, document.getElementById("test"))
-
-        function demo() {
-            console.log("标题被点击了");
-        }
 
     </script>
 </body>
