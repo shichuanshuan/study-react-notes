@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1. 准备好一个"容器" -->
+    <div id="test"></div>
+
+    <!-- 2. 引入react 核心库 -->
+    <script type="text/javascript" src="../React-js/react.development.js"></script>
+    <script type="text/javascript" src="../React-js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../React-js/babel.min.js"></script>
+
+    <!-- 引入 prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../React-js/prop-types.js"></script>
+
+    <script type="text/babel">
+
+        class Demo extends React.Component {
+
+            showData = () => {
+                // 节点被放到 this 中了
+                const { input1 } = this
+                alert(input1.value)
+            }
+
+            showData2 = () => {
+                const { input2 } = this
+                alert(input2.value)
+            }
+
+            render() {
+                // 字符串形式的调用已经过时了，建议使用回调函数的形式
+                return (
+                    <div>
+
+                        {/*  把当前节点存储到 this.input1 变量中了
+                        <input ref={(c) => {this.input1 = c}} type="text" placeholder="点击按钮提示数据" />&nbsp;
+
+                        以下是简写方式
+                        */}
+                        <input ref={c => this.input1 = c} type="text" placeholder="点击按钮提示数据" />&nbsp;
+                        <button onClick={this.showData}>点击我提示左侧的数据</button>
+                        <input ref={c => this.input2 = c} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />&nbsp;
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Demo />, document.getElementById("test"));
+
+    </script>
+
+</body>
+
+</html>
