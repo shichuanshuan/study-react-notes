@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1. 准备好一个"容器" -->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- 2. 引入react 核心库 -->
+    <script type="text/javascript" src="../React-js/react.development.js"></script>
+    <script type="text/javascript" src="../React-js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../React-js/babel.min.js"></script>
+
+    <!-- 引入 prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../React-js/prop-types.js"></script>
+
+    <script type="text/babel">
+        class Person extends React.Component {
+
+            // 在React中，构造函数仅用于以下两种情况
+            // 1. 通过给 this.state 赋值对象来初始化内部 state。     -- 现在通过简写直接赋值就可
+            // 2. 为事件处理函数绑定实例        -- 通过箭头函数赋值即可
+            constructor(props) {
+                // 构造器是否接收 props，是否传递给 super，取决于：是否希望在构造器中通过 this 访问 props
+                super(props)
+            }
+
+            // 对标签属性进行类型、必要性的限制
+            static propTypes = {
+                name: PropTypes.string.isRequired,
+                sex: PropTypes.string,
+                age: PropTypes.number,
+                speak: PropTypes.func,
+            }
+
+            // 指定默认标签属性值
+            static defaultProps = {
+                sex: '男',
+                age: 18
+            }
+
+
+            render() {
+                const { name, age, sex } = this.props;
+
+                return <ul>
+                    <li>姓名：{name}</li>
+                    <li>性别：{age}</li>
+                    <li>年龄：{sex}</li>
+                </ul>
+            }
+        }
+
+        ReactDOM.render(<Person name="jerry" age={18} sex="男" speak={speak} />, document.getElementById("test1"))
+    </script>
+</body>
+
+</html>
