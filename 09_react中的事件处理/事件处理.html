@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1. 准备好一个"容器" -->
+    <div id="test"></div>
+
+    <!-- 2. 引入react 核心库 -->
+    <script type="text/javascript" src="../React-js/react.development.js"></script>
+    <script type="text/javascript" src="../React-js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../React-js/babel.min.js"></script>
+
+    <!-- 引入 prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../React-js/prop-types.js"></script>
+
+    <script type="text/babel">
+
+        class Demo extends React.Component {
+            /**
+             * 1. 通过 onXxx 属性指定事件处理函数（注意大小写）
+             *    a. React 使用的是自定义(合成)事件，而不是使用的原生 DOM 事件      ----- 为了更好的兼容性
+             *    b. React 中的事件是通过事件委托方式处理的(委托给组件最外层的元素)
+             * 2. 通过 event.target 得到发生事件的DOM元素对象
+            */
+            myRef1 = React.createRef()
+            myRef2 = React.createRef()
+
+            showData = () => {
+                console.log(this.myRef1)
+                alert(this.myRef1.current.value)
+            }
+
+            // 发生事件和操作事件的元素是同一个时，可以使用这种方式
+            showData2 = (event) => {
+                alert(event.target.value)
+            }
+
+            render() {
+                // 字符串形式的调用已经过时了，建议使用回调函数的形式
+                return (
+                    <div>
+                        <input ref={this.myRef1} type="text" placeholder="点击按钮提示数据" />&nbsp;
+                        <button onClick={this.showData}>点击我提示左侧的数据</button>
+                        <input onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />&nbsp;
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Demo />, document.getElementById("test"));
+
+    </script>
+
+</body>
+
+</html>
