@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1. 准备好一个"容器" -->
+    <div id="test"></div>
+
+    <!-- 2. 引入react 核心库 -->
+    <script type="text/javascript" src="../React-js/react.development.js"></script>
+    <script type="text/javascript" src="../React-js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../React-js/babel.min.js"></script>
+
+    <!-- 引入 prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../React-js/prop-types.js"></script>
+
+    <script type="text/babel">
+
+        class Login extends React.Component {
+            // 初始化状态
+            state = {
+                username: '',
+                password: ''
+            }
+
+            saveUsername = (event) => {
+                this.setState({ username: event.target.value })
+            }
+
+            savePassword = (event) => {
+                this.setState({ password: event.target.value })
+            }
+
+            handleSubmit = (event) => {
+                event.preventDefault() // 阻止表单提交
+                const { username, password } = this.state
+                alert(`你输入的用户名是：${username}，密码是: ${password}`)
+            }
+
+            // 受控组件
+            // 页面中所有输入DOM，随着输入，把内容维护到 state 状态里，等需要用的时候直接从状态里面取，就是受控组件
+            // 推荐使用 受控组件的方式，因为受控组件里没有 ref，官网不推荐过度使用 ref
+            render() {
+                return (
+                    <form action="http://www.atguigu.com" onSubmit={this.handleSubmit}>
+                        用户名：<input onChange={this.saveUsername} type="text" name="username" />
+                        密码：<input onChange={this.savePassword} type="password" name="password" />
+                        <button>登录</button>
+                    </form>
+                )
+            }
+        }
+
+        ReactDOM.render(<Login />, document.getElementById("test"));
+
+    </script>
+
+</body>
+
+</html>
