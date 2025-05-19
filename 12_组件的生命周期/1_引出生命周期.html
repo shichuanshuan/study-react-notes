@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1. 准备好一个"容器" -->
+    <div id="test"></div>
+
+    <!-- 2. 引入react 核心库 -->
+    <script type="text/javascript" src="../React-js/react.development.js"></script>
+    <script type="text/javascript" src="../React-js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../React-js/babel.min.js"></script>
+
+    <!-- 引入 prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../React-js/prop-types.js"></script>
+
+    <script type="text/babel">
+        // 创建组件
+        class Life extends React.Component {
+
+            state = { opacity: 1 }
+
+            death = () => {
+                // 卸载组件
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+
+
+            // 什么时候执行，组件挂在完毕之后执行
+            componentDidMount() {
+                this.timer = setInterval(() => {
+                    // 获取原状态
+                    // const 定义的变量不能修改，let 定义的变量可以修改
+
+                    let { opacity } = this.state
+
+                    // 减少 0.1
+                    opacity -= 0.1
+
+                    if (opacity <= 0) opacity = 1
+
+                    // 设置新的透明度
+                    // this.setState({ opacity: opacity })
+                    this.setState({ opacity })
+                }, 200);
+            }
+
+            // 组将将要卸载
+            componentWillUnmount() {
+                // 清除定时器
+                clearInterval(this.timer)
+            }
+
+            // render 什么时候执行，初始化渲染、状态更新之后执行
+            render() {
+                return (
+                    <div>
+                        <h2 style={{ opacity: this.state.opacity }}>React 学不会怎么办？</h2>
+                        <button onClick={this.death}>不活了</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Life />, document.getElementById("test"));
+
+    </script>
+
+</body>
+
+</html>

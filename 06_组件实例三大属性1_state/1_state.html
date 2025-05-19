@@ -28,7 +28,7 @@
                 this.demo = this.changeWeather.bind(this)
             }
 
-            // render 调用几次？ -- 1+n 次，1是初始化的那次， n 是状态更新的次数
+            // render 调用几次？ -- 1+n 次，1是初始化的那次， n 是状态更新的次数,更新一次状态，调用一次
             render() {
                 // 读取状态
                 const { isHot, wind } = this.state
